@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, colorchooser, font, messagebox
+from tkinter import filedialog, colorchooser, font, messagebox, simpledialog
 from tkinter.scrolledtext import ScrolledText
 import os
 
@@ -8,8 +8,10 @@ root = tk.Tk()
 root.title("Mmabia Textpad")
 root.geometry("800x600")
 
-# Initialize the global filename variable
+# Initialize the global filename and font variables
 filename = None
+current_font_family = "Arial"
+current_font_size = 12
 
 # Function to create a new file
 def new_file():
@@ -54,10 +56,26 @@ def save_as_file():
 
 # Function to choose and set the font
 def choose_font():
-    font_family = tk.simpledialog.askstring("Font", "Enter font family:")
-    font_size = tk.simpledialog.askinteger("Font", "Enter font size:")
+    global current_font_family, current_font_size
+    font_family = simpledialog.askstring("Font", "Enter font family:")
+    font_size = simpledialog.askinteger("Font", "Enter font size:")
     if font_family and font_size:
-        text_area.configure(font=(font_family, font_size))
+        current_font_family = font_family
+        current_font_size = font_size
+        text_area.configure(font=(current_font_family, current_font_size))
+
+# Function to increase the font size
+def increase_font_size():
+    global current_font_size
+    current_font_size += 2
+    text_area.configure(font=(current_font_family, current_font_size))
+
+# Function to decrease the font size
+def decrease_font_size():
+    global current_font_size
+    if current_font_size > 2:
+        current_font_size -= 2
+        text_area.configure(font=(current_font_family, current_font_size))
 
 # Function to choose and set the text color
 def choose_color():
@@ -89,6 +107,48 @@ def insert_video():
     if filepath:
         messagebox.showinfo("Info", "Video inserted. (This is a placeholder implementation.)")
 
+# Function to apply bold formatting
+def apply_bold():
+    try:
+        current_tags = text_area.tag_names("sel.first")
+        if "bold" in current_tags:
+            text_area.tag_remove("bold", "sel.first", "sel.last")
+        else:
+            text_area.tag_add("bold", "sel.first", "sel.last")
+            bold_font = font.Font(text_area, text_area.cget("font"))
+            bold_font.configure(weight="bold")
+            text_area.tag_configure("bold", font=bold_font)
+    except tk.TclError:
+        pass
+
+# Function to apply italic formatting
+def apply_italic():
+    try:
+        current_tags = text_area.tag_names("sel.first")
+        if "italic" in current_tags:
+            text_area.tag_remove("italic", "sel.first", "sel.last")
+        else:
+            text_area.tag_add("italic", "sel.first", "sel.last")
+            italic_font = font.Font(text_area, text_area.cget("font"))
+            italic_font.configure(slant="italic")
+            text_area.tag_configure("italic", font=italic_font)
+    except tk.TclError:
+        pass
+
+# Function to apply underline formatting
+def apply_underline():
+    try:
+        current_tags = text_area.tag_names("sel.first")
+        if "underline" in current_tags:
+            text_area.tag_remove("underline", "sel.first", "sel.last")
+        else:
+            text_area.tag_add("underline", "sel.first", "sel.last")
+            underline_font = font.Font(text_area, text_area.cget("font"))
+            underline_font.configure(underline=True)
+            text_area.tag_configure("underline", font=underline_font)
+    except tk.TclError:
+        pass
+
 # Function to create the menu
 def create_menu():
     menu = tk.Menu(root)
@@ -119,7 +179,13 @@ def create_menu():
     format_menu = tk.Menu(menu, tearoff=False)
     menu.add_cascade(label="Format", menu=format_menu)
     format_menu.add_command(label="Font", command=choose_font)
+    format_menu.add_command(label="Increase Font Size", command=increase_font_size)
+    format_menu.add_command(label="Decrease Font Size", command=decrease_font_size)
     format_menu.add_command(label="Color", command=choose_color)
+    format_menu.add_separator()
+    format_menu.add_command(label="Bold", command=apply_bold)
+    format_menu.add_command(label="Italic", command=apply_italic)
+    format_menu.add_command(label="Underline", command=apply_underline)
     
     # Theme menu
     theme_menu = tk.Menu(menu, tearoff=False)
@@ -136,7 +202,7 @@ def create_menu():
 # Function to create the text area
 def create_text_area():
     global text_area
-    text_area = ScrolledText(root, wrap='word', undo=True)
+    text_area = ScrolledText(root, wrap='word', undo=True, font=(current_font_family, current_font_size))
     text_area.pack(fill='both', expand=1)
     text_area.focus_set()
 
