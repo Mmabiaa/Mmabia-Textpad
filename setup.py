@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='mmabia_textpad',
-    version='0.1',
+    version='1.5',
     packages=find_packages(),
     license='MIT',
     description='Edit, format, insert and save your text',
