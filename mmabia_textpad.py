@@ -18,7 +18,7 @@ import os
 
 # Initialize the main Tkinter window
 root = Tk()
-root.title("Mmabia Textpad")
+root.title("Mmabiaa Textpad")
 root.geometry("800x600")
 '''
     root: the main window object
