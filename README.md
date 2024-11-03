@@ -1,8 +1,8 @@
-# 📝 TextPad
+# 📝 Mmabiaa-TextPad
 
 Welcome to TextPad, a simple yet powerful text editor designed for quick note-taking and editing! Whether you need to jot down ideas or edit scripts, TextPad is here to help.
 
-![TextPad Demo]() 
+![TextPad Demo](https://github.com/Mmabiaa/Mmabia-Textpad/blob/main/textpad.png) 
 
 ## Features
 
