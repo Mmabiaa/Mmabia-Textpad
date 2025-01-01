@@ -18,4 +18,4 @@ To get started with TextPad, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/textpad.git
+   git clone https://github.com/mmabiaa/mmabia-textpad.git
