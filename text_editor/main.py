@@ -1,7 +1,7 @@
 from tkinter import Tk
-from menu import *
+from commands import create_menu
 from file_operations import create_text_area
-
+from text_formatting import create_text_area
 # Initialize the main Tkinter window
 root = Tk()
 root.title("Mmabiaa Textpad")

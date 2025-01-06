@@ -1,7 +1,14 @@
 from tkinter import simpledialog, font, TclError
-
+from tkinter.scrolledtext import ScrolledText
 current_font_family = "Times New Roman"
 current_font_size = 18
+
+
+def create_text_area(root):
+    global text_area
+    text_area = ScrolledText(root, wrap='word', undo=True, font=(current_font_family, current_font_size))
+    text_area.pack(fill='both', expand=1)
+    text_area.focus_set()
 
 def choose_font(text_area):
     """Open a dialog to choose a font family and size."""
