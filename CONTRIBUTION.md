@@ -20,7 +20,7 @@ We welcome contributions from everyone! Here’s how you can help:
 2. *Clone Your Fork*: 
    Open your terminal and run:
    ```bash
-   git github.com/mmabiaa/textpad.git
+   git github.com/mmabiaa/Mmabia-Textpad.git
    ```
 
 3. *Create a New Branch*: 
