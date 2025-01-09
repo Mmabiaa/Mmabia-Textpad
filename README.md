@@ -28,7 +28,7 @@ To get started with TextPad, follow these steps:
 1. *Clone the Repository*:
    Open your terminal or command prompt and run:
 ```bash
-git github.com/mmabiaa/TextPad.git
+git github.com/mmabiaa/Mmabia-TextPad.git
 ```
 2.**Navigate to directory**
 ``` bash
