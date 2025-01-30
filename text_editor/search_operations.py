@@ -1,8 +1,10 @@
 from tkinter import Toplevel, Label, Entry, Button, StringVar, BooleanVar
 import text_formatting
 
+
 class SearchWindow:
-    search_window_instance = None  # Class-level variable to track the active window
+    # Class-level variable to track the active window
+    search_window_instance = None
 
     def __init__(self, root):
         if SearchWindow.search_window_instance:
@@ -10,10 +12,10 @@ class SearchWindow:
             SearchWindow.search_window_instance.search_window.lift()
             # Focus on the search entry
             SearchWindow.search_window_instance.search_entry.focus_set()
-            
+            # Check if text is selected in the text area, and use it as the search query
             SearchWindow.search_window_instance.on_selected_area_text()
             return
-        
+
         self.search_window = Toplevel(root)
         self.occurrences_var = StringVar()
         self.case_sensitive = BooleanVar(root, False)
@@ -27,7 +29,6 @@ class SearchWindow:
         SearchWindow.search_window_instance = self
 
     def create_popup(self):
-        
 
         self.search_window.title("Search")
         self.search_window.geometry("400x100")
@@ -36,7 +37,9 @@ class SearchWindow:
 
         self.search_entry.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
         self.search_entry.focus_set()
-        self.search_entry.bind("<KeyRelease>", lambda e: self.search_text(self.search_entry.get(), None))
+        self.search_entry.bind(
+            "<KeyRelease>", lambda e: self.search_text(self.search_entry.get(), None)
+        )
 
         Label(self.search_window, textvariable=self.occurrences_var).grid(
             row=1, column=2, columnspan=2, padx=10, pady=10
@@ -56,7 +59,9 @@ class SearchWindow:
         case_sensitive_button = Button(
             self.search_window,
             text="Case Sensitive",
-            command=lambda: self.toggle_case_sensitive(case_sensitive_button, self.search_entry.get())
+            command=lambda: self.toggle_case_sensitive(
+                case_sensitive_button, self.search_entry.get()
+            ),
         )
         case_sensitive_button.grid(row=0, column=2, padx=10, pady=10)
         self.update_case_sensitive_button(case_sensitive_button)
@@ -65,7 +70,6 @@ class SearchWindow:
         self.text_area.bind("<KeyRelease>", lambda e: self.on_text_modified())
         self.on_selected_area_text()  # Move this call to the end of create_popup()
 
-    
     def on_selected_area_text(self):
         # Check if text is selected in the text area, and use it as the search query
         selected_text = (
@@ -76,10 +80,9 @@ class SearchWindow:
         search_query = selected_text if selected_text else self.search_entry.get()
         self.search_entry.delete(0, "end")
         self.search_entry.insert(0, search_query)
-        
+
         # Ensure the search updates with the new text
         self.search_text(search_query, None)
-
 
     def on_text_modified(self):
         # Reset search when text is modified
@@ -160,8 +163,6 @@ class SearchWindow:
 
         # Update label
         self.occurrences_var.set(f"{self.current_occurrence + 1} of {count}")
-        
-        print(occurrences)
 
     def toggle_case_sensitive(self, button, word):
         self.case_sensitive.set(not self.case_sensitive.get())
