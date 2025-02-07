@@ -1,5 +1,6 @@
 from tkinter import Menu
 from file_operations import *
+from search_operations import *
 from text_formatting import *
 from insertions import *
 from tkinter import messagebox
@@ -30,6 +31,7 @@ def create_menu(root):
     edit_menu.add_command(label="Paste", command=lambda: text_area.event_generate("<<Paste>>"))
     edit_menu.add_command(label="Select All", command=lambda: text_area.event_generate("<<SelectAll>>"))
     edit_menu.add_separator()
+    edit_menu.add_command(label="Search", command= lambda: SearchWindow(root))
     
     # Format menu
     format_menu = Menu(menu, tearoff=False)
