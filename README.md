@@ -58,11 +58,11 @@ We welcome contributions! If you'd like to contribute to TextPad, please follow 
 3. Make your changes and commit them with descriptive messages.
 4. Push to your branch and create a pull request.
 
-For more detailed guidelines, please refer to our [CONTRIBUTING.md](CONTRIBUTING.md) file.
+For more detailed guidelines, please refer to our [CONTRIBUTION.md](CONTRIBUTION.md) file.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](MIT%20License) file for details.
 
 ## Contact
 
